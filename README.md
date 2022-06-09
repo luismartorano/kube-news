@@ -58,7 +58,7 @@ kubectl apply -f https://kind.sigs.k8s.io/examples/loadbalancer/metallb-configma
 LB_IP=$(kubectl get svc/nomedoserviço -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
 ```
 
-# should output foo and bar on separate lines 
+#should output foo and bar on separate lines 
 ```sh
 for _ in {1..10}; do
   curl ${LB_IP}:porta usada na imagem
