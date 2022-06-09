@@ -40,13 +40,13 @@ jobs:
 
       - name: Testing
         run: |
+          kind get kubeconfig
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+          kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
+          kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
+          kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml
+          kubectl apply -f https://kind.sigs.k8s.io/examples/loadbalancer/metallb-configmap.yaml
 
-          kubectl cluster-info
-          kubectl get pods -n kube-system
-          export KUBECONFIG="$(kind get kubeconfig)"
-          echo "current-context:" $(kubectl config current-context)
-          echo "environment-kubeconfig:" ${KUBECONFIG}
-          
       #- name: Kubernetes set context -> Incluindo o Kube config do context
       #  uses: Azure/k8s-set-context@v2
       #  with:
