@@ -34,6 +34,13 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
+      - uses: engineerd/setup-kind@v0.1.0
+
+      - name: Testing
+        run: |
+          export KUBECONFIG="$(kind get kubeconfig)"
+          kubectl cluster-info
+          kubectl get pods -n kube-system
         
       - name: Kubernetes set context -> Incluindo o Kube config do context
         uses: Azure/k8s-set-context@v2
