@@ -26,8 +26,8 @@ spec:
   selector: 
     app: kubenewsv1
   ports:
-    - port: 9081
-      targetPort: 8081
+    - port: 9080
+      targetPort: 8080
       protocol: TCP
       name: http
       #nodePort: 30000
@@ -51,5 +51,5 @@ spec:
           service:
             name: kubenewsv1
             port:
-              number: 8081
+              number: 8080
       
