@@ -40,14 +40,16 @@ jobs:
 
       - name: Testing
         run: |
-          kind get kubeconfig > kubeconfig
+          kind get kubeconfig > /tmp/kubeconfig
+          chmod +x /tmp/kubeconfig
+          kubectl apply -f ./k8s/deployment.yaml
           
       - name: Kubernetes set context -> Incluindo o Kube config do context
         uses: Azure/k8s-set-context@v2
         
         with:
           method: kubeconfig
-          kubeconfig: kubeconfig
+          kubeconfig: /tmp/kubeconfig
       
       - name: Deploy para o Cluster Kubernetes
         uses: Azure/k8s-deploy@v3.1
