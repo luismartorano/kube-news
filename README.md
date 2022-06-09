@@ -52,7 +52,7 @@ docker network inspect -f '{{.IPAM.Config}}' kind
 kubectl apply -f https://kind.sigs.k8s.io/examples/loadbalancer/metallb-configmap.yaml
 ```
 
--- VERIFICAÇÃO --
+-- VERIFICAÇÃO APÓS A CRIAÇÃO DE UM SVC--
 
 ```sh
 LB_IP=$(kubectl get svc/nomedoserviço -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
