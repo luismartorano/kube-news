@@ -35,14 +35,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: engineerd/setup-kind@v0.5.0
+        with:
+          wait: "60s"
 
       - name: Testing
         run: |
+
           kubectl cluster-info
           kubectl get pods -n kube-system
+          export KUBECONFIG="$(kind get kubeconfig)"
           echo "current-context:" $(kubectl config current-context)
           echo "environment-kubeconfig:" ${KUBECONFIG}
-        
+          
       #- name: Kubernetes set context -> Incluindo o Kube config do context
       #  uses: Azure/k8s-set-context@v2
       #  with:
@@ -55,5 +59,5 @@ jobs:
       #    images: luismartorano/kubenewsv1:${{ github.run_number }}
       #    manifests: |
       #      k8s/deployment.yaml
-          
+      #    
       
