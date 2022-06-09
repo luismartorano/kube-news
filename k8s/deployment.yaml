@@ -24,6 +24,7 @@ spec:
               value: "luismartorano"
             - name: POSTGRES_DB
               value: "kubenews"
+
 ---
 apiVersion: v1 
 kind: Service 
@@ -35,6 +36,7 @@ spec:
   ports: 
   - port: 5432 
     targetPort: 5432
+
 ---
 apiVersion: apps/v1
 kind: Deployment 
@@ -62,6 +64,7 @@ spec:
           value: "1q2w3e4r5t"
         - name: DB_HOST
           value: "postgres"
+
 ---
 apiVersion: v1 
 kind: Service

@@ -44,9 +44,11 @@ jobs:
           
       - name: Kubernetes set context -> Incluindo o Kube config do context
         uses: Azure/k8s-set-context@v2
+        run: |
+          kind get kubeconfig > kubeconfig
         with:
           method: kubeconfig
-          kubeconfig: $(kind get kubeconfig)
+          kubeconfig: kubeconfig
       
       - name: Deploy para o Cluster Kubernetes
         uses: Azure/k8s-deploy@v3.1
