@@ -40,12 +40,11 @@ jobs:
 
       - name: Testing
         run: |
-          kind get kubeconfig
+          kind get kubeconfig > kubeconfig
           
       - name: Kubernetes set context -> Incluindo o Kube config do context
         uses: Azure/k8s-set-context@v2
-        run: |
-          kind get kubeconfig > kubeconfig
+        
         with:
           method: kubeconfig
           kubeconfig: kubeconfig
