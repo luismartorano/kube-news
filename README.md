@@ -1,5 +1,7 @@
 # Kube-News V1 - By Luis Martorano
 
+kind create cluster --config cluster.yaml 
+
 ## KIND
 ```yaml
 kind: Cluster

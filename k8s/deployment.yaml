@@ -43,7 +43,7 @@ kind: Deployment
 metadata:
   name: kubenews
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: kubenews
@@ -51,6 +51,11 @@ spec:
     metadata:
       labels:
         app: kubenews
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+
     spec:
       containers:
       - name: kubenews
@@ -77,4 +82,21 @@ spec:
   - port: 80
     targetPort: 8080
     #nodePort: 30000
-  type: NodePort
+  type: LoadBalancer
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kube-news
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: kube-news
+            port:
+              number: 8080
